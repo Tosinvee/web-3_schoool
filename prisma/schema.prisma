@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -14,10 +8,32 @@ datasource db {
 }
 
 model User {
+  id              Int              @id @default(autoincrement()) // Primary Key
+  username        String
+  email           String
+  chatId          BigInt           @unique
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  enrolledCourses enrolledCourse[] // Relation to the enrolled courses
+}
+
+model Course {
+  id              Int              @id @default(autoincrement()) // Primary Key
+  courseTitle     String
+  courseDetails   String
+  courseCategory  String
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  enrolledCourses enrolledCourse[] // Relation to the enrolled courses
+}
+
+model enrolledCourse {
   id        Int      @id @default(autoincrement()) // Primary Key
-  username  String   @unique
-  email     String   @unique
-  password  String
+  email     String
+  user      User     @relation(fields: [chatId], references: [chatId], onDelete: Cascade)
+  course    Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  chatId    BigInt
+  courseId  Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
