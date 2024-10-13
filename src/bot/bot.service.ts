@@ -89,7 +89,7 @@ export class BotService {
                 [
                   {
                     text: 'launch App',
-                    web_app: { url: 'https://www.udemy.com/' },
+                    web_app: { url: `${process.env.APP_URL}` },
                   },
                 ],
               ],
