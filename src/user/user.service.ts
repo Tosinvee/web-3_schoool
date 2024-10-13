@@ -16,7 +16,7 @@ export class UserService {
       });
       return { createdUser };
     } catch (error) {
-      throw new error();
+      console.log(error);
     }
   }
 
@@ -28,7 +28,7 @@ export class UserService {
 
       return { userProfile };
     } catch (error) {
-      throw new error();
+      console.log(error);
     }
   }
 
@@ -43,7 +43,7 @@ export class UserService {
       });
       return { updatedUser };
     } catch (error) {
-      throw new error();
+      console.log(error);
     }
   }
 }
